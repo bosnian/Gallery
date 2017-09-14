@@ -20,21 +20,11 @@ class PhotoStorageService: DataStorageService, IPhotoStorageService {
     
     
     func GetAll() -> [PhotoModelCD] {
-        
-        let request = NSFetchRequest<PhotoModelCD>(entityName: "PhotoModelCD")
-        
-        do {
-            return try context.fetch(request)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return [PhotoModelCD]();
+        return GetAll(type: PhotoModelCD.self)
     }
     
     func Get(id: Int) -> PhotoModelCD? {
-        let request = NSFetchRequest<PhotoModelCD>(entityName: "PhotoModelCD")
-        request.predicate = NSPredicate(format: "id = \(id)")
+        let request = GetRequest(type: PhotoModelCD.self,id: id)
         
         do {
             let users = try context.fetch(request)

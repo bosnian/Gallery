@@ -21,21 +21,11 @@ class AlbumStorageService: DataStorageService, IAlbumStorageService {
     }
     
     func GetAll() -> [AlbumModelCD] {
-        
-        let request = NSFetchRequest<AlbumModelCD>(entityName: "AlbumModelCD")
-        
-        do {
-            return try context.fetch(request)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return [AlbumModelCD]();
+        return GetAll(type: AlbumModelCD.self)
     }
     
     func Get(id: Int) -> AlbumModelCD? {
-        let request = NSFetchRequest<AlbumModelCD>(entityName: "AlbumModelCD")
-        request.predicate = NSPredicate(format: "id = \(id)")
+        let request = GetRequest(type: AlbumModelCD.self,id: id)
         
         do {
             let users = try context.fetch(request)

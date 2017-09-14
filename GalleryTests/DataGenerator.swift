@@ -11,43 +11,30 @@ import ObjectMapper
 @testable import Gallery
 
 class DataGenerator {
-    class func GenerateUsers() -> [UserModel] {
-        let testBundle = Bundle(for: self)
-        if let file = testBundle.url(forResource: "users", withExtension: "json") {
-            let data = try! Data(contentsOf: file)
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            return Mapper<UserModel>().mapArray(JSONObject: json)!
-        }
-        return [UserModel]()
+    static func GenerateUsers() -> [UserModel] {
+        return ReadDataBasedOnTypes(type: UserModel.self, fileName: "users")
     }
     
-    class func GeneratePosts() -> [PostModel] {
-        let testBundle = Bundle(for: self)
-        if let file = testBundle.url(forResource: "posts", withExtension: "json") {
-            let data = try! Data(contentsOf: file)
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            return Mapper<PostModel>().mapArray(JSONObject: json)!
-        }
-        return [PostModel]()
+    static func GeneratePosts() -> [PostModel] {
+        return ReadDataBasedOnTypes(type: PostModel.self, fileName: "posts")
     }
     
-    class func GenerateAlbums() -> [AlbumModel] {
-        let testBundle = Bundle(for: self)
-        if let file = testBundle.url(forResource: "albums", withExtension: "json") {
-            let data = try! Data(contentsOf: file)
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            return Mapper<AlbumModel>().mapArray(JSONObject: json)!
-        }
-        return [AlbumModel]()
+    static func GenerateAlbums() -> [AlbumModel] {
+        return ReadDataBasedOnTypes(type: AlbumModel.self, fileName: "albums")
     }
     
-    class func GeneratePhotos() -> [PhotoModel] {
+    static func GeneratePhotos() -> [PhotoModel] {
+        return ReadDataBasedOnTypes(type: PhotoModel.self, fileName: "photos")
+
+    }
+    
+    private static func ReadDataBasedOnTypes<T>(type: T.Type, fileName: String) -> [T] where T: BaseMappable {
         let testBundle = Bundle(for: self)
-        if let file = testBundle.url(forResource: "photos", withExtension: "json") {
+        if let file = testBundle.url(forResource: fileName, withExtension: "json") {
             let data = try! Data(contentsOf: file)
             let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            return Mapper<PhotoModel>().mapArray(JSONObject: json)!
+            return Mapper<T>().mapArray(JSONObject: json)!
         }
-        return [PhotoModel]()
+        return [T]()
     }
 }

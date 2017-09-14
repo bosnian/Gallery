@@ -8,20 +8,22 @@
 
 import ObjectMapper
 
-class AlbumModel: Mappable {
+class AlbumModel: BaseModel {
+    
     var userId: Int?
-    var id: Int?
     var title: String?
     
-    init() { }
-    
-    required init?(map: Map) {
-        
+    override init() {
+        super.init()
     }
     
-    func mapping(map: Map) {
+    required init?(map: Map) {
+        super.init(map: map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         userId  <- map["userId"]
-        id      <- map["id"]
         title   <- map["title"]
     }
 }

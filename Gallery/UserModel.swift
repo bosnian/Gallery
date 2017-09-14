@@ -8,9 +8,8 @@
 
 import ObjectMapper
 
-class UserModel: Mappable {
+class UserModel: BaseModel {
 
-    var id: Int?
     var name: String?
     var username: String?
     var email: String?
@@ -19,12 +18,16 @@ class UserModel: Mappable {
     var website: String?
     var company: CompanyModel?
     
-    init() { }
+    override init() {
+        super.init()
+    }
     
-    required init?(map: Map) { }
+    required init?(map: Map) {
+        super.init(map: map)
+    }
     
-    func mapping(map: Map) {
-        id <- map["id"]
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         name <- map["name"]
         username <- map["username"]
         email <- map["email"]

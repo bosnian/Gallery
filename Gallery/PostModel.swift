@@ -8,17 +8,22 @@
 
 import ObjectMapper
 
-class PostModel: Mappable {
+class PostModel: BaseModel {
+    
     var userId: Int?
-    var id: Int?
     var title: String?
     var body: String?
     
-    init() { }
+    override init() {
+        super.init()
+    }
     
-    required init?(map: Map) { }
+    required init?(map: Map) {
+        super.init(map: map)
+    }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         userId  <- map["userId"]
         id      <- map["id"]
         title   <- map["title"]

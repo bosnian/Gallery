@@ -72,7 +72,7 @@ class NetworkServiceTests: BaseTestCase {
             XCTFail("Could not get users!")
             exp.fulfill()
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testFetchAllAlbums() {
@@ -86,7 +86,7 @@ class NetworkServiceTests: BaseTestCase {
             XCTFail("Could not get albums!")
             exp.fulfill()
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testFetchAllPhotos() {

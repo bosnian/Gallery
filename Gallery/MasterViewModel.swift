@@ -14,15 +14,7 @@ import CoreData
 
 class MasterViewModel {
     
-    var selectedId = Observable<Int>(0)
-    var filter = Observable<String>("")
-    var title = Observable<String>("Title".localized)
-    
-    
-    var postSyncing = Observable<Bool>(false)
-    
-    var _posts = Observable<[Post]>([Post]())
-    var posts = Observable<[Post]>([Post]())
+    let data = Data()
     
     private var networkService: INetworkService?
     
@@ -32,19 +24,19 @@ class MasterViewModel {
                                                name: .UIApplicationDidBecomeActive,
                                                object: nil)
         
-        _ = _posts.observeNext { (_) in
-            self.filter.value = self.filter.value
+        _ = data._posts.observeNext { (_) in
+            self.data.filter.value = self.data.filter.value
         }
         
-        _ = filter.observeNext(with: { (keyword) in
-            self.posts.value = self._posts.value.filter({ (post) -> Bool in
+        _ = data.filter.observeNext(with: { (keyword) in
+            self.data.posts.value = self.data._posts.value.filter({ (post) -> Bool in
                 return post.title.value.contains(keyword) || keyword.isEmpty
             })
         })
     }
     
     func fetchPosts() {
-        _posts.value = DI.resolve(IPostStorageService.self)!.GetAll().map {
+        data._posts.value = DI.resolve(IPostStorageService.self)!.GetAll().map {
             Post(post: $0)
         }
     }
@@ -52,17 +44,17 @@ class MasterViewModel {
     func removePost(id: Int) {
         DI.resolve(IPostStorageService.self)!.Remove(id: id)
         
-        _posts.silentUpdate(value: _posts.value.filter({ (post) -> Bool in
+        data._posts.silentUpdate(value: data._posts.value.filter({ (post) -> Bool in
             return post.id.value != id
         }))
         
-        posts.value = posts.value.filter({ (post) -> Bool in
+        data.posts.value = data.posts.value.filter({ (post) -> Bool in
             return post.id.value != id
         })
     }
     
     @objc func syncData() {
-        postSyncing.value = true
+        data.postSyncing.value = true
         networkService = DI.resolve(INetworkService.self)!
         syncUsers()
     }
@@ -96,12 +88,12 @@ class MasterViewModel {
             let storage = DI.resolve(IPhotoStorageService.self)!
             storage.Sync(photos: photos)
             self.fetchPosts()
-            self.postSyncing.value = false
+            self.data.postSyncing.value = false
         }, error: errorOccured)
     }
     
     private func errorOccured(error: Error?) {
-        postSyncing.value = false
+        data.postSyncing.value = false
     }
     
     class Post {
@@ -114,6 +106,18 @@ class MasterViewModel {
             title = Observable<String>(post.title ?? "")
             email = Observable<String>(post.user?.email ?? "")
         }
+    }
+    
+    class Data {
+        var selectedId = Observable<Int>(0)
+        var filter = Observable<String>("")
+        var title = Observable<String>("Title".localized)
+        
+        
+        var postSyncing = Observable<Bool>(false)
+        
+        var _posts = Observable<[Post]>([Post]())
+        var posts = Observable<[Post]>([Post]())
     }
     
     deinit {

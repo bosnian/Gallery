@@ -19,22 +19,12 @@ class PostStorageService: DataStorageService, IPostStorageService {
     }
     
     func GetAll() -> [PostModelCD] {
-        
-        let request = NSFetchRequest<PostModelCD>(entityName: "PostModelCD")
-        
-        do {
-            return try context.fetch(request)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return [PostModelCD]();
+        return GetAll(type: PostModelCD.self)
     }
     
     func Get(id: Int) -> PostModelCD? {
-        let request = NSFetchRequest<PostModelCD>(entityName: "PostModelCD")
-        request.predicate = NSPredicate(format: "id = \(id)")
-        
+        let request = GetRequest(type: PostModelCD.self,id: id)
+       
         do {
             let posts = try context.fetch(request)
             if let post = posts.first {
@@ -48,7 +38,7 @@ class PostStorageService: DataStorageService, IPostStorageService {
     
     func Sync(posts: [PostModel]) {
         
-        let entity = NSEntityDescription.entity(forEntityName: "PostModelCD", in: context)!
+        let entity = GetEntity(type: PostModelCD.self)
         
         var savedPosts = GetAll()
         
@@ -83,12 +73,7 @@ class PostStorageService: DataStorageService, IPostStorageService {
         for sp in savedPosts {
             context.delete(sp)
         }
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        Save()
     }
     
     func Remove(id: Int) {
@@ -99,7 +84,7 @@ class PostStorageService: DataStorageService, IPostStorageService {
             let posts = try context.fetch(request)
             if let post = posts.first {
                 context.delete(post)
-                try context.save()
+                Save()
             }
         } catch let error as NSError {
             print("Could not delete. \(error), \(error.userInfo)")

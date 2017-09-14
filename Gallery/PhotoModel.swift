@@ -8,20 +8,24 @@
 
 import ObjectMapper
 
-class PhotoModel: Mappable {
+class PhotoModel: BaseModel {
+    
     var albumId: Int?
-    var id: Int?
     var title: String?
     var url: String?
     var thumbnailUrl: String?
     
-    init() { }
+    override init() {
+        super.init()
+    }
     
-    required init?(map: Map) { }
+    required init?(map: Map) {
+        super.init(map: map)
+    }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         albumId         <- map["albumId"]
-        id              <- map["id"]
         title           <- map["title"]
         url             <- map["url"]
         thumbnailUrl    <- map["thumbnailUrl"]

@@ -49,10 +49,10 @@ class MasterTableViewController: UITableViewController {
     }
     
     func bond() {
-        model.title.bind(to: navigationItem.reactive.title)
-        model.posts.bind(to: tableView, createCell: createCell)
-        _ = model.postSyncing.observeNext(with: showIndicator)
-        _ = model.selectedId.observeNext(with: updateSelected)
+        model.data.title.bind(to: navigationItem.reactive.title)
+        model.data.posts.bind(to: tableView, createCell: createCell)
+        _ = model.data.postSyncing.observeNext(with: showIndicator)
+        _ = model.data.selectedId.observeNext(with: updateSelected)
     }
     
     func updateSelected(id: Int) {
@@ -95,15 +95,15 @@ class MasterTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        model.selectedId.value = model.posts.value[indexPath.row].id.value
+        model.data.selectedId.value = model.data.posts.value[indexPath.row].id.value
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.destructive, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
             tableView.beginUpdates()
-            self.model.removePost(id: self.model.posts.value[indexPath.row].id.value)
+            self.model.removePost(id: self.model.data.posts.value[indexPath.row].id.value)
             tableView.deleteRows(at: [indexPath], with: .top)
-            self.model.selectedId.value = -1
+            self.model.data.selectedId.value = -1
             tableView.endUpdates()
             
         })
@@ -114,6 +114,6 @@ class MasterTableViewController: UITableViewController {
 extension MasterTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-        model.filter.value = searchController.searchBar.text ?? ""
+        model.data.filter.value = searchController.searchBar.text ?? ""
     }
 }

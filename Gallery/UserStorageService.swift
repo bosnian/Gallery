@@ -11,21 +11,11 @@ import CoreData
 class UserStorageService: DataStorageService, IUserStorageService {
     
     func GetAll() -> [UsersModelCD] {
-        
-        let request = NSFetchRequest<UsersModelCD>(entityName: "UsersModelCD")
-        
-        do {
-            return try context.fetch(request)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        return [UsersModelCD]();
+        return GetAll(type: UsersModelCD.self)
     }
     
     func Get(id: Int) -> UsersModelCD? {
-        let request = NSFetchRequest<UsersModelCD>(entityName: "UsersModelCD")
-        request.predicate = NSPredicate(format: "id = \(id)")
+        let request = GetRequest(type: UsersModelCD.self,id: id)
         
         do {
             let users = try context.fetch(request)

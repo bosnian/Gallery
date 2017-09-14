@@ -57,6 +57,7 @@ class PostDetailViewController: UIViewController, UICollectionViewDataSource, UI
         
         let photo = model.albumsRepository[indexPath.section].photos.value[indexPath.row]
         let dispo = photo.url.observeNext { (url) in
+            cell.imageView.kf.indicatorType = .activity
             cell.imageView.kf.setImage(with: url)
         }
         

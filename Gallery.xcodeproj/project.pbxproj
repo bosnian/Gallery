@@ -43,6 +43,7 @@
 		A06BCF2F1F6A14A2004F326E /* PFColorHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BCF2E1F6A14A2004F326E /* PFColorHash.swift */; };
 		A0B3A3EA1F673CF9001D7146 /* DataStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A3E91F673CF9001D7146 /* DataStorageService.swift */; };
 		A0B3A3EC1F673D0C001D7146 /* IPostStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A3EB1F673D0C001D7146 /* IPostStorageService.swift */; };
+		A0B78FC41F6B0ADA00D51297 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B78FC31F6B0ADA00D51297 /* BaseModel.swift */; };
 		A0BF20981F6703C7002F715E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF20971F6703C7002F715E /* AppDelegate.swift */; };
 		A0BF209D1F6703C7002F715E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0BF209B1F6703C7002F715E /* Main.storyboard */; };
 		A0BF20A21F6703C7002F715E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0BF20A11F6703C7002F715E /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		A06BCF2E1F6A14A2004F326E /* PFColorHash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PFColorHash.swift; sourceTree = "<group>"; };
 		A0B3A3E91F673CF9001D7146 /* DataStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorageService.swift; sourceTree = "<group>"; };
 		A0B3A3EB1F673D0C001D7146 /* IPostStorageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IPostStorageService.swift; sourceTree = "<group>"; };
+		A0B78FC31F6B0ADA00D51297 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		A0BF20941F6703C7002F715E /* Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0BF20971F6703C7002F715E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0BF209C1F6703C7002F715E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		A0DCC9401F670D3C0095FB69 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A0B78FC31F6B0ADA00D51297 /* BaseModel.swift */,
 				A01D50FB1F671A39003A6293 /* Partials */,
 				A0DCC9411F670D790095FB69 /* PostModel.swift */,
 				A01D50F91F67184E003A6293 /* UserModel.swift */,
@@ -659,6 +662,7 @@
 				A01D50F81F6713E0003A6293 /* Alamofire+ObjectMapper.swift in Sources */,
 				A01D51051F671C47003A6293 /* PhotoModel.swift in Sources */,
 				A051E4541F6763070022A3E5 /* PhotoStorageService.swift in Sources */,
+				A0B78FC41F6B0ADA00D51297 /* BaseModel.swift in Sources */,
 				A051E4521F6762D80022A3E5 /* IPhotoStorageService.swift in Sources */,
 				A0BF20981F6703C7002F715E /* AppDelegate.swift in Sources */,
 				A051E44C1F675A450022A3E5 /* UserStorageService.swift in Sources */,

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2c1-fq-F1B">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="g8d-jT-Sf8">
+            <objects>
+                <viewController id="DfY-3D-2FZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9kE-B3-bOq"/>
+                        <viewControllerLayoutGuide type="bottom" id="jF1-BT-sXT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gwE-Ph-RdR">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFB-6i-LBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="726" y="-78"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="DO6-UI-Tog">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="aQz-bY-kQU" customClass="MasterTableViewController" customModule="Gallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="nFN-Y8-zNi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ddv-be-z0n">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ddv-be-z0n" id="zFO-hF-UKP">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aQz-bY-kQU" id="OAI-Te-h9S"/>
+                            <outlet property="delegate" destination="aQz-bY-kQU" id="aaW-LN-37E"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="pyt-vL-UGD"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6mf-yB-XZx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="-712"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WRU-rh-Hmt">
+            <objects>
+                <navigationController id="aS5-49-cTv" customClass="NavigationController" customModule="Gallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2w0-n0-pJO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="aQz-bY-kQU" kind="relationship" relationship="rootViewController" id="Zu4-7o-yhy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B8c-Qs-yLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="726" y="-712"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="8Nb-6d-6W1">
+            <objects>
+                <splitViewController id="2c1-fq-F1B" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7td-4n-kjf"/>
+                    <connections>
+                        <segue destination="aS5-49-cTv" kind="relationship" relationship="masterViewController" id="A7V-O6-V0z"/>
+                        <segue destination="DfY-3D-2FZ" kind="relationship" relationship="detailViewController" id="Dkg-J0-hR7"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NQy-x7-Vrl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-48" y="-396"/>
+        </scene>
+    </scenes>
+</document>
